@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Landing } from "@/components/landing/Landing";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "ADSecurity | Recuperación segura y autónoma de acceso corporativo" },
+      {
+        name: "description",
+        content:
+          "ADSecurity permite a los colaboradores restablecer contraseñas, desbloquear cuentas y recuperar el acceso a sistemas corporativos de forma autónoma, segura y sin depender de la mesa de ayuda.",
+      },
+      { property: "og:title", content: "ADSecurity | Recuperación segura y autónoma de acceso corporativo" },
+      {
+        property: "og:description",
+        content:
+          "Plataforma de autoservicio para la gestión de credenciales y recuperación segura de acceso a cuentas corporativas.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ADSecurity | Recuperación segura de acceso corporativo" },
+      {
+        name: "twitter:description",
+        content:
+          "Autoservicio seguro para restablecer contraseñas y recuperar acceso corporativo.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
+  component: LandingPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function LandingPage() {
+  return <Landing />;
 }
