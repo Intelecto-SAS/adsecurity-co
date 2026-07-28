@@ -95,7 +95,7 @@ function Hero() {
             <span className="gradient-text">Devuélvele el tiempo</span> a tu equipo.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
-            ADSecurity permite que los colaboradores restablezcan sus contraseñas,
+            <BrandLogo /> permite que los colaboradores restablezcan sus contraseñas,
             desbloqueen sus cuentas y recuperen el acceso a los sistemas corporativos
             de forma autónoma, segura y desde cualquier lugar.
           </p>
