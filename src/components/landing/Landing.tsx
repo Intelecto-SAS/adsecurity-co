@@ -428,22 +428,16 @@ function Integration() {
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-14 relative neu-card p-8 md:p-14">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
-              {nodes.slice(0, 3).map((n) => (
-                <NodeCard key={n.label} {...n} />
-              ))}
-              <div className="col-span-2 lg:col-span-6 flex justify-center py-6">
-                <div className="w-20 h-20 rounded-2xl gradient-electric grid place-items-center text-white"
-                  style={{ boxShadow: "0 0 40px oklch(0.62 0.22 255 / 0.6)" }}
-                >
-                  <img src={logo.url} alt="ADSecurity" className="h-6 w-auto brightness-0 invert" />
-                </div>
-              </div>
-              {nodes.slice(3).map((n) => (
-                <NodeCard key={n.label} {...n} />
-              ))}
-            </div>
+          <div className="mt-12 flex flex-wrap gap-3">
+            {nodes.map((n) => (
+              <span
+                key={n.label}
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full neu-card text-sm font-medium"
+              >
+                <span className="text-primary">{n.icon}</span>
+                {n.label}
+              </span>
+            ))}
           </div>
         </Reveal>
       </div>
@@ -451,14 +445,6 @@ function Integration() {
   );
 }
 
-function NodeCard({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return (
-    <div className="neu-inset rounded-2xl p-4 flex flex-col items-center text-center gap-2">
-      <span className="w-10 h-10 rounded-lg gradient-electric grid place-items-center text-white">{icon}</span>
-      <span className="text-xs font-medium">{label}</span>
-    </div>
-  );
-}
 
 /* --------------------------- RESPONSIVE --------------------------- */
 function ResponsiveSection() {
