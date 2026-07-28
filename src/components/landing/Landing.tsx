@@ -598,7 +598,7 @@ function FAQ() {
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                   >
-                    <span className="font-semibold text-sm sm:text-base">{it.q}</span>
+                    <span className="font-semibold text-sm sm:text-base">{withLogo(it.q)}</span>
                     <ChevronDown className={`w-5 h-5 shrink-0 text-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   <div
@@ -606,7 +606,7 @@ function FAQ() {
                     style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
                     <div className="overflow-hidden">
-                      <p className="px-6 pb-5 text-sm text-muted-foreground">{it.a}</p>
+                      <p className="px-6 pb-5 text-sm text-muted-foreground">{withLogo(it.a)}</p>
                     </div>
                   </div>
                 </div>
