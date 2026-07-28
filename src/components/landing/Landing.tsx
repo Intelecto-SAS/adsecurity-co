@@ -458,7 +458,7 @@ function ResponsiveSection() {
             <span className="gradient-text">cualquier lugar y dispositivo</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            La experiencia de ADSecurity está pensada para ser sencilla, clara y accesible para
+            La experiencia de <BrandLogo /> está pensada para ser sencilla, clara y accesible para
             usuarios con diferentes niveles de conocimiento tecnológico.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -484,7 +484,7 @@ function ResponsiveSection() {
                   <div className="absolute inset-0 grid-mesh opacity-30" />
                   <div className="relative flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-cyan-brand" />
-                    <span className="text-white text-xs font-semibold">ADSecurity</span>
+                    <BrandLogo invert className="h-3" />
                   </div>
                   <div className="mt-3 space-y-1.5 relative">
                     <div className="h-2 rounded-full bg-white/20 w-3/4" />
@@ -516,47 +516,6 @@ function ResponsiveSection() {
   );
 }
 
-/* --------------------------- USE CASES --------------------------- */
-function UseCases() {
-  const cases = [
-    { icon: <KeyRound className="w-5 h-5" />, title: "Contraseña olvidada", desc: "El colaborador restablece su credencial en minutos.", result: "Continuidad inmediata" },
-    { icon: <Lock className="w-5 h-5" />, title: "Cuenta bloqueada", desc: "Desbloqueo autónomo tras validar identidad.", result: "Acceso restaurado sin soporte" },
-    { icon: <Globe className="w-5 h-5" />, title: "Colaborador remoto", desc: "Recuperación disponible desde cualquier lugar.", result: "Sin interrumpir la jornada" },
-    { icon: <UserPlus className="w-5 h-5" />, title: "Nuevo colaborador", desc: "Guía autoservicio para primeros accesos.", result: "Onboarding más ágil" },
-    { icon: <UserCheck className="w-5 h-5" />, title: "Validación de identidad", desc: "Verificación segura con métodos configurables.", result: "Confianza en cada solicitud" },
-    { icon: <HeadphonesIcon className="w-5 h-5" />, title: "Reducir carga de soporte", desc: "Automatiza solicitudes repetitivas.", result: "Soporte enfocado en lo importante" },
-  ];
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary">Casos de uso</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            Diseñado para escenarios <span className="gradient-text">del día a día</span>
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cases.map((c, i) => (
-            <Reveal key={c.title} delay={i * 80}>
-              <div className="neu-card p-6 h-full flex flex-col">
-                <div className="w-11 h-11 rounded-xl neu-inset grid place-items-center text-primary mb-4">
-                  {c.icon}
-                </div>
-                <h3 className="font-semibold">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground flex-1">{c.desc}</p>
-                <div className="mt-5 pt-4 border-t border-border/60 flex items-center gap-2 text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="font-medium">{c.result}</span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* --------------------------- COMMERCIAL CTA --------------------------- */
 function CommercialCTA() {
   return (
@@ -578,7 +537,7 @@ function CommercialCTA() {
                   <span className="gradient-text">no restablecer contraseñas todo el día.</span>
                 </h2>
                 <p className="mt-5 text-white/80 max-w-2xl">
-                  Con ADSecurity, los colaboradores recuperan el acceso de forma autónoma mientras el
+                  Con <BrandLogo invert />, los colaboradores recuperan el acceso de forma autónoma mientras el
                   equipo de soporte dedica su tiempo a iniciativas de mayor valor para la organización.
                 </p>
                 <a
@@ -692,7 +651,7 @@ function ContactForm() {
             Solicita una <span className="gradient-text">demostración</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Cuéntanos sobre tu organización y te mostraremos cómo ADSecurity puede transformar la
+            Cuéntanos sobre tu organización y te mostraremos cómo <BrandLogo /> puede transformar la
             gestión de credenciales y recuperación de acceso.
           </p>
           <div className="mt-8 space-y-4">
@@ -751,7 +710,7 @@ function ContactForm() {
                 required
               />
               <span>
-                Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de ADSecurity.
+                Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de <BrandLogo />.
               </span>
             </label>
 
@@ -825,7 +784,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
-          <span>© {new Date().getFullYear()} ADSecurity. Todos los derechos reservados.</span>
+          <span className="flex items-center gap-1.5">© {new Date().getFullYear()} <BrandLogo invert className="h-3.5" /> · Todos los derechos reservados.</span>
           <span>Diseñado para proteger la identidad corporativa.</span>
         </div>
       </div>
@@ -845,11 +804,9 @@ export function Landing() {
         <Solution />
         <HowItWorks />
         <Benefits />
-        <BeforeAfter />
         <Security />
         <Integration />
         <ResponsiveSection />
-        <UseCases />
         <CommercialCTA />
         <FAQ />
         <ContactForm />
