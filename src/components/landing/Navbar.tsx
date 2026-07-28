@@ -1,6 +1,6 @@
+import logo from "@/assets/adsecurity-logo.png";
+import { Menu, ShieldCheck, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Menu, X, ShieldCheck } from "lucide-react";
-import logo from "@/assets/adsecurity-logo.png.asset.json";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
@@ -32,7 +32,7 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-6">
         <a href="#inicio" className="flex items-center gap-2 shrink-0">
-          <img src={logo.url} alt="ADSecurity" className="h-8 w-auto" />
+          <img src={logo} alt="ADSecurity" className="h-8 w-auto" />
         </a>
 
         <nav className="hidden lg:flex items-center gap-1">

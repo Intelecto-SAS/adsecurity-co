@@ -1,49 +1,49 @@
-import { useState } from "react";
-import {
-  ShieldCheck,
-  ArrowRight,
-  KeyRound,
-  Fingerprint,
-  Users,
-  Clock,
-  HeadphonesIcon,
-  Zap,
-  Building2,
-  Globe,
-  Lock,
-  Activity,
-  CheckCircle2,
-  XCircle,
-  Sparkles,
-  MonitorSmartphone,
-  Smartphone,
-  Tablet,
-  Monitor,
-  Network,
-  FileCheck2,
-  Settings2,
-  UserCheck,
-  ChevronDown,
-  Mail,
-  Phone,
-  Building,
-  User,
-  MessageSquare,
-  Send,
-  ScrollText,
-  Server,
-  Workflow,
-} from "lucide-react";
-import { Navbar } from "@/components/landing/Navbar";
+import logo from "@/assets/adsecurity-logo.png";
 import { HeroVisual } from "@/components/landing/HeroVisual";
+import { Navbar } from "@/components/landing/Navbar";
 import { Reveal } from "@/components/landing/Reveal";
-import logo from "@/assets/adsecurity-logo.png.asset.json";
+import {
+    Activity,
+    ArrowRight,
+    Building,
+    Building2,
+    CheckCircle2,
+    ChevronDown,
+    Clock,
+    FileCheck2,
+    Fingerprint,
+    Globe,
+    HeadphonesIcon,
+    KeyRound,
+    Lock,
+    Mail,
+    MessageSquare,
+    Monitor,
+    MonitorSmartphone,
+    Network,
+    Phone,
+    ScrollText,
+    Send,
+    Server,
+    Settings2,
+    ShieldCheck,
+    Smartphone,
+    Sparkles,
+    Tablet,
+    User,
+    UserCheck,
+    Users,
+    Workflow,
+    XCircle,
+    Zap,
+} from "lucide-react";
+import { useState } from "react";
 
 /* --------------------------- BRAND --------------------------- */
 function BrandLogo({ invert = false, className = "h-[1.05em]" }: { invert?: boolean; className?: string }) {
   return (
     <img
-      src={logo.url}
+      src={logo}
       alt="ADSecurity"
       className={`inline-block w-auto align-[-0.16em] ${invert ? "brightness-0 invert" : ""} ${className}`}
     />
@@ -755,7 +755,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 relative">
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <img src={logo.url} alt="ADSecurity" className="h-8 w-auto brightness-0 invert" />
+            <img src={logo} alt="ADSecurity" className="h-8 w-auto brightness-0 invert" />
             <p className="mt-4 text-sm text-white/70 max-w-md">
               Plataforma de autoservicio para la gestión de credenciales y recuperación segura de
               acceso a cuentas corporativas.
