@@ -282,7 +282,7 @@ function HowItWorks() {
                       {s.icon}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-base">{s.title}</h3>
+                  <h3 className="font-semibold text-base">{withLogo(s.title)}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
