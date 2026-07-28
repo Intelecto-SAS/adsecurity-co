@@ -218,7 +218,7 @@ function Problem() {
               <Sparkles className="w-6 h-6" />
             </div>
             <p className="text-lg font-medium">
-              ADSecurity transforma estos incidentes en{" "}
+              <BrandLogo /> transforma estos incidentes en{" "}
               <span className="gradient-text font-semibold">procesos rápidos, seguros y completamente autónomos.</span>
             </p>
           </div>
