@@ -43,6 +43,31 @@ import { HeroVisual } from "@/components/landing/HeroVisual";
 import { Reveal } from "@/components/landing/Reveal";
 import logo from "@/assets/adsecurity-logo.png.asset.json";
 
+/* --------------------------- BRAND --------------------------- */
+function BrandLogo({ invert = false, className = "h-[1.05em]" }: { invert?: boolean; className?: string }) {
+  return (
+    <img
+      src={logo.url}
+      alt="ADSecurity"
+      className={`inline-block w-auto align-[-0.16em] ${invert ? "brightness-0 invert" : ""} ${className}`}
+    />
+  );
+}
+
+function withLogo(text: string, invert = false) {
+  const parts = text.split("ADSecurity");
+  return (
+    <>
+      {parts.map((p, i) => (
+        <span key={i}>
+          {i > 0 && <BrandLogo invert={invert} />}
+          {p}
+        </span>
+      ))}
+    </>
+  );
+}
+
 /* ------------------------------- HERO ------------------------------- */
 function Hero() {
   return (
