@@ -358,7 +358,7 @@ function Security() {
             <span className="gradient-text">la seguridad</span>
           </h2>
           <p className="mt-5 text-white/80">
-            ADSecurity está diseñado para integrar seguridad en todo el proceso de recuperación de acceso,
+            <BrandLogo invert /> está diseñado para integrar seguridad en todo el proceso de recuperación de acceso,
             con controles verificables en cada paso.
           </p>
           <div className="mt-8 grid sm:grid-cols-2 gap-3">
