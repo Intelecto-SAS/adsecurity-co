@@ -230,15 +230,6 @@ function Problem() {
 
 /* --------------------------- SOLUTION --------------------------- */
 function Solution() {
-  const capabilities = [
-    "Restablecer contraseñas",
-    "Desbloquear cuentas",
-    "Validar identidad del usuario",
-    "Gestionar credenciales",
-    "Recuperar acceso sin depender de soporte",
-    "Conectarse con directorio corporativo",
-    "Ejecutar procesos automatizados",
-  ];
   return (
     <section id="solucion" className="py-24 bg-secondary/30 relative overflow-hidden">
       <div className="absolute inset-0 grid-mesh opacity-30 pointer-events-none" />
@@ -250,69 +241,12 @@ function Solution() {
             <span className="gradient-text">recuperar el acceso de forma segura</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            ADSecurity conecta a tus colaboradores con los sistemas corporativos a través de flujos
+            <BrandLogo /> conecta a tus colaboradores con los sistemas corporativos a través de flujos
             controlados, verificables y disponibles en todo momento.
           </p>
         </Reveal>
-
-        {/* Flow diagram */}
-        <Reveal delay={200}>
-          <div className="mt-16">
-            <div className="relative">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-2 items-center">
-                <FlowNode icon={<User className="w-5 h-5" />} label="Usuario" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<Fingerprint className="w-5 h-5" />} label="Validación de identidad" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<ShieldCheck className="w-6 h-6" />} label="ADSecurity" tone="dark" featured />
-              </div>
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-2 items-center">
-                <div className="hidden md:block" />
-                <div className="hidden md:block" />
-                <FlowNode icon={<Server className="w-5 h-5" />} label="Directorio corporativo" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<CheckCircle2 className="w-5 h-5" />} label="Acceso recuperado" tone="light" />
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="mt-16 grid lg:grid-cols-2 gap-6">
-          {capabilities.map((c, i) => (
-            <Reveal key={c} delay={i * 60}>
-              <div className="neu-card p-5 flex items-center gap-4">
-                <div className="w-10 h-10 shrink-0 rounded-xl gradient-electric grid place-items-center text-white">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div className="text-sm font-medium">{c}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
-  );
-}
-
-function FlowNode({ icon, label, tone, featured }: { icon: React.ReactNode; label: string; tone: "light" | "dark"; featured?: boolean }) {
-  return (
-    <div className={`flex flex-col items-center text-center gap-3 p-4 rounded-2xl ${tone === "dark" ? "neu-dark text-white" : "neu-card"} ${featured ? "scale-105" : ""}`}>
-      <div className={`w-12 h-12 rounded-xl grid place-items-center ${tone === "dark" ? "gradient-electric text-white" : "neu-inset text-primary"}`}>
-        {icon}
-      </div>
-      <div className={`text-xs font-semibold ${tone === "dark" ? "text-white" : ""}`}>{label}</div>
-    </div>
-  );
-}
-
-function FlowConnector() {
-  return (
-    <div className="hidden md:flex items-center justify-center">
-      <svg width="100%" height="20" viewBox="0 0 100 20">
-        <line x1="0" y1="10" x2="100" y2="10" stroke="oklch(0.62 0.22 255 / 0.5)" strokeWidth="2" className="dash-line" />
-        <circle cx="95" cy="10" r="3" fill="oklch(0.62 0.22 255)" />
-      </svg>
-    </div>
   );
 }
 
