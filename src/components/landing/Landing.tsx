@@ -3,7 +3,6 @@ import {
   ShieldCheck,
   ArrowRight,
   KeyRound,
-  Unlock,
   Fingerprint,
   Users,
   Clock,
@@ -23,10 +22,7 @@ import {
   Network,
   FileCheck2,
   Settings2,
-  UserPlus,
-  UserX,
   UserCheck,
-  Wifi,
   ChevronDown,
   Mail,
   Phone,
@@ -42,6 +38,31 @@ import { Navbar } from "@/components/landing/Navbar";
 import { HeroVisual } from "@/components/landing/HeroVisual";
 import { Reveal } from "@/components/landing/Reveal";
 import logo from "@/assets/adsecurity-logo.png.asset.json";
+
+/* --------------------------- BRAND --------------------------- */
+function BrandLogo({ invert = false, className = "h-[1.05em]" }: { invert?: boolean; className?: string }) {
+  return (
+    <img
+      src={logo.url}
+      alt="ADSecurity"
+      className={`inline-block w-auto align-[-0.16em] ${invert ? "brightness-0 invert" : ""} ${className}`}
+    />
+  );
+}
+
+function withLogo(text: string, invert = false) {
+  const parts = text.split("ADSecurity");
+  return (
+    <>
+      {parts.map((p, i) => (
+        <span key={i}>
+          {i > 0 && <BrandLogo invert={invert} />}
+          {p}
+        </span>
+      ))}
+    </>
+  );
+}
 
 /* ------------------------------- HERO ------------------------------- */
 function Hero() {
@@ -70,7 +91,7 @@ function Hero() {
             <span className="gradient-text">Devuélvele el tiempo</span> a tu equipo.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
-            ADSecurity permite que los colaboradores restablezcan sus contraseñas,
+            <BrandLogo /> permite que los colaboradores restablezcan sus contraseñas,
             desbloqueen sus cuentas y recuperen el acceso a los sistemas corporativos
             de forma autónoma, segura y desde cualquier lugar.
           </p>
@@ -193,7 +214,7 @@ function Problem() {
               <Sparkles className="w-6 h-6" />
             </div>
             <p className="text-lg font-medium">
-              ADSecurity transforma estos incidentes en{" "}
+              <BrandLogo /> transforma estos incidentes en{" "}
               <span className="gradient-text font-semibold">procesos rápidos, seguros y completamente autónomos.</span>
             </p>
           </div>
@@ -205,15 +226,6 @@ function Problem() {
 
 /* --------------------------- SOLUTION --------------------------- */
 function Solution() {
-  const capabilities = [
-    "Restablecer contraseñas",
-    "Desbloquear cuentas",
-    "Validar identidad del usuario",
-    "Gestionar credenciales",
-    "Recuperar acceso sin depender de soporte",
-    "Conectarse con directorio corporativo",
-    "Ejecutar procesos automatizados",
-  ];
   return (
     <section id="solucion" className="py-24 bg-secondary/30 relative overflow-hidden">
       <div className="absolute inset-0 grid-mesh opacity-30 pointer-events-none" />
@@ -225,69 +237,12 @@ function Solution() {
             <span className="gradient-text">recuperar el acceso de forma segura</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            ADSecurity conecta a tus colaboradores con los sistemas corporativos a través de flujos
+            <BrandLogo /> conecta a tus colaboradores con los sistemas corporativos a través de flujos
             controlados, verificables y disponibles en todo momento.
           </p>
         </Reveal>
-
-        {/* Flow diagram */}
-        <Reveal delay={200}>
-          <div className="mt-16">
-            <div className="relative">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-2 items-center">
-                <FlowNode icon={<User className="w-5 h-5" />} label="Usuario" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<Fingerprint className="w-5 h-5" />} label="Validación de identidad" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<ShieldCheck className="w-6 h-6" />} label="ADSecurity" tone="dark" featured />
-              </div>
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-2 items-center">
-                <div className="hidden md:block" />
-                <div className="hidden md:block" />
-                <FlowNode icon={<Server className="w-5 h-5" />} label="Directorio corporativo" tone="light" />
-                <FlowConnector />
-                <FlowNode icon={<CheckCircle2 className="w-5 h-5" />} label="Acceso recuperado" tone="light" />
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="mt-16 grid lg:grid-cols-2 gap-6">
-          {capabilities.map((c, i) => (
-            <Reveal key={c} delay={i * 60}>
-              <div className="neu-card p-5 flex items-center gap-4">
-                <div className="w-10 h-10 shrink-0 rounded-xl gradient-electric grid place-items-center text-white">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div className="text-sm font-medium">{c}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
-  );
-}
-
-function FlowNode({ icon, label, tone, featured }: { icon: React.ReactNode; label: string; tone: "light" | "dark"; featured?: boolean }) {
-  return (
-    <div className={`flex flex-col items-center text-center gap-3 p-4 rounded-2xl ${tone === "dark" ? "neu-dark text-white" : "neu-card"} ${featured ? "scale-105" : ""}`}>
-      <div className={`w-12 h-12 rounded-xl grid place-items-center ${tone === "dark" ? "gradient-electric text-white" : "neu-inset text-primary"}`}>
-        {icon}
-      </div>
-      <div className={`text-xs font-semibold ${tone === "dark" ? "text-white" : ""}`}>{label}</div>
-    </div>
-  );
-}
-
-function FlowConnector() {
-  return (
-    <div className="hidden md:flex items-center justify-center">
-      <svg width="100%" height="20" viewBox="0 0 100 20">
-        <line x1="0" y1="10" x2="100" y2="10" stroke="oklch(0.62 0.22 255 / 0.5)" strokeWidth="2" className="dash-line" />
-        <circle cx="95" cy="10" r="3" fill="oklch(0.62 0.22 255)" />
-      </svg>
-    </div>
   );
 }
 
@@ -323,7 +278,7 @@ function HowItWorks() {
                       {s.icon}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-base">{s.title}</h3>
+                  <h3 className="font-semibold text-base">{withLogo(s.title)}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
@@ -372,90 +327,6 @@ function Benefits() {
   );
 }
 
-/* --------------------------- BEFORE / AFTER --------------------------- */
-function BeforeAfter() {
-  const before = [
-    "El usuario pierde el acceso",
-    "Debe comunicarse con soporte",
-    "Se crea una solicitud",
-    "Un agente valida manualmente la identidad",
-    "El usuario debe esperar",
-    "La mesa de ayuda acumula solicitudes",
-  ];
-  const after = [
-    "El usuario inicia el autoservicio",
-    "Valida su identidad",
-    "Recupera el acceso",
-    "Continúa trabajando",
-    "La mesa de ayuda se concentra en incidentes de mayor valor",
-  ];
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary">Antes y después</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            De horas de espera a{" "}
-            <span className="gradient-text">minutos de autoservicio</span>
-          </h2>
-        </Reveal>
-
-        <div className="mt-14 grid lg:grid-cols-2 gap-6">
-          <Reveal>
-            <div className="neu-card p-8 h-full relative overflow-hidden">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-11 h-11 rounded-xl neu-inset grid place-items-center text-destructive">
-                  <XCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Antes</div>
-                  <h3 className="font-semibold text-lg">Sin ADSecurity</h3>
-                </div>
-              </div>
-              <ul className="space-y-3">
-                {before.map((b, i) => (
-                  <li key={b} className="flex items-start gap-3 text-sm">
-                    <span className="mt-1 w-5 h-5 shrink-0 rounded-full grid place-items-center text-[10px] font-bold neu-inset text-muted-foreground">
-                      {i + 1}
-                    </span>
-                    <span className="text-muted-foreground">{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <div className="neu-dark p-8 h-full text-white relative overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full blur-3xl opacity-40"
-                style={{ background: "radial-gradient(circle, oklch(0.62 0.22 255 / 0.7), transparent)" }}
-              />
-              <div className="flex items-center gap-3 mb-6 relative">
-                <div className="w-11 h-11 rounded-xl gradient-electric grid place-items-center text-white">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-cyan-brand">Después</div>
-                  <h3 className="font-semibold text-lg">Con ADSecurity</h3>
-                </div>
-              </div>
-              <ul className="space-y-3 relative">
-                {after.map((a, i) => (
-                  <li key={a} className="flex items-start gap-3 text-sm">
-                    <span className="mt-1 w-5 h-5 shrink-0 rounded-full grid place-items-center text-[10px] font-bold gradient-electric text-white">
-                      {i + 1}
-                    </span>
-                    <span className="text-white/90">{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* --------------------------- SECURITY --------------------------- */
 function Security() {
   const items = [
@@ -483,7 +354,7 @@ function Security() {
             <span className="gradient-text">la seguridad</span>
           </h2>
           <p className="mt-5 text-white/80">
-            ADSecurity está diseñado para integrar seguridad en todo el proceso de recuperación de acceso,
+            <BrandLogo invert /> está diseñado para integrar seguridad en todo el proceso de recuperación de acceso,
             con controles verificables en cada paso.
           </p>
           <div className="mt-8 grid sm:grid-cols-2 gap-3">
@@ -553,22 +424,16 @@ function Integration() {
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-14 relative neu-card p-8 md:p-14">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
-              {nodes.slice(0, 3).map((n) => (
-                <NodeCard key={n.label} {...n} />
-              ))}
-              <div className="col-span-2 lg:col-span-6 flex justify-center py-6">
-                <div className="w-20 h-20 rounded-2xl gradient-electric grid place-items-center text-white"
-                  style={{ boxShadow: "0 0 40px oklch(0.62 0.22 255 / 0.6)" }}
-                >
-                  <img src={logo.url} alt="ADSecurity" className="h-6 w-auto brightness-0 invert" />
-                </div>
-              </div>
-              {nodes.slice(3).map((n) => (
-                <NodeCard key={n.label} {...n} />
-              ))}
-            </div>
+          <div className="mt-12 flex flex-wrap gap-3">
+            {nodes.map((n) => (
+              <span
+                key={n.label}
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full neu-card text-sm font-medium"
+              >
+                <span className="text-primary">{n.icon}</span>
+                {n.label}
+              </span>
+            ))}
           </div>
         </Reveal>
       </div>
@@ -576,14 +441,6 @@ function Integration() {
   );
 }
 
-function NodeCard({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return (
-    <div className="neu-inset rounded-2xl p-4 flex flex-col items-center text-center gap-2">
-      <span className="w-10 h-10 rounded-lg gradient-electric grid place-items-center text-white">{icon}</span>
-      <span className="text-xs font-medium">{label}</span>
-    </div>
-  );
-}
 
 /* --------------------------- RESPONSIVE --------------------------- */
 function ResponsiveSection() {
@@ -597,7 +454,7 @@ function ResponsiveSection() {
             <span className="gradient-text">cualquier lugar y dispositivo</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            La experiencia de ADSecurity está pensada para ser sencilla, clara y accesible para
+            La experiencia de <BrandLogo /> está pensada para ser sencilla, clara y accesible para
             usuarios con diferentes niveles de conocimiento tecnológico.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -623,7 +480,7 @@ function ResponsiveSection() {
                   <div className="absolute inset-0 grid-mesh opacity-30" />
                   <div className="relative flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-cyan-brand" />
-                    <span className="text-white text-xs font-semibold">ADSecurity</span>
+                    <BrandLogo invert className="h-3" />
                   </div>
                   <div className="mt-3 space-y-1.5 relative">
                     <div className="h-2 rounded-full bg-white/20 w-3/4" />
@@ -655,47 +512,6 @@ function ResponsiveSection() {
   );
 }
 
-/* --------------------------- USE CASES --------------------------- */
-function UseCases() {
-  const cases = [
-    { icon: <KeyRound className="w-5 h-5" />, title: "Contraseña olvidada", desc: "El colaborador restablece su credencial en minutos.", result: "Continuidad inmediata" },
-    { icon: <Lock className="w-5 h-5" />, title: "Cuenta bloqueada", desc: "Desbloqueo autónomo tras validar identidad.", result: "Acceso restaurado sin soporte" },
-    { icon: <Globe className="w-5 h-5" />, title: "Colaborador remoto", desc: "Recuperación disponible desde cualquier lugar.", result: "Sin interrumpir la jornada" },
-    { icon: <UserPlus className="w-5 h-5" />, title: "Nuevo colaborador", desc: "Guía autoservicio para primeros accesos.", result: "Onboarding más ágil" },
-    { icon: <UserCheck className="w-5 h-5" />, title: "Validación de identidad", desc: "Verificación segura con métodos configurables.", result: "Confianza en cada solicitud" },
-    { icon: <HeadphonesIcon className="w-5 h-5" />, title: "Reducir carga de soporte", desc: "Automatiza solicitudes repetitivas.", result: "Soporte enfocado en lo importante" },
-  ];
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary">Casos de uso</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            Diseñado para escenarios <span className="gradient-text">del día a día</span>
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cases.map((c, i) => (
-            <Reveal key={c.title} delay={i * 80}>
-              <div className="neu-card p-6 h-full flex flex-col">
-                <div className="w-11 h-11 rounded-xl neu-inset grid place-items-center text-primary mb-4">
-                  {c.icon}
-                </div>
-                <h3 className="font-semibold">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground flex-1">{c.desc}</p>
-                <div className="mt-5 pt-4 border-t border-border/60 flex items-center gap-2 text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="font-medium">{c.result}</span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* --------------------------- COMMERCIAL CTA --------------------------- */
 function CommercialCTA() {
   return (
@@ -717,7 +533,7 @@ function CommercialCTA() {
                   <span className="gradient-text">no restablecer contraseñas todo el día.</span>
                 </h2>
                 <p className="mt-5 text-white/80 max-w-2xl">
-                  Con ADSecurity, los colaboradores recuperan el acceso de forma autónoma mientras el
+                  Con <BrandLogo invert />, los colaboradores recuperan el acceso de forma autónoma mientras el
                   equipo de soporte dedica su tiempo a iniciativas de mayor valor para la organización.
                 </p>
                 <a
@@ -778,7 +594,7 @@ function FAQ() {
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                   >
-                    <span className="font-semibold text-sm sm:text-base">{it.q}</span>
+                    <span className="font-semibold text-sm sm:text-base">{withLogo(it.q)}</span>
                     <ChevronDown className={`w-5 h-5 shrink-0 text-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   <div
@@ -786,7 +602,7 @@ function FAQ() {
                     style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
                     <div className="overflow-hidden">
-                      <p className="px-6 pb-5 text-sm text-muted-foreground">{it.a}</p>
+                      <p className="px-6 pb-5 text-sm text-muted-foreground">{withLogo(it.a)}</p>
                     </div>
                   </div>
                 </div>
@@ -831,7 +647,7 @@ function ContactForm() {
             Solicita una <span className="gradient-text">demostración</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Cuéntanos sobre tu organización y te mostraremos cómo ADSecurity puede transformar la
+            Cuéntanos sobre tu organización y te mostraremos cómo <BrandLogo /> puede transformar la
             gestión de credenciales y recuperación de acceso.
           </p>
           <div className="mt-8 space-y-4">
@@ -890,7 +706,7 @@ function ContactForm() {
                 required
               />
               <span>
-                Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de ADSecurity.
+                Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de <BrandLogo />.
               </span>
             </label>
 
@@ -964,7 +780,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
-          <span>© {new Date().getFullYear()} ADSecurity. Todos los derechos reservados.</span>
+          <span className="flex items-center gap-1.5">© {new Date().getFullYear()} <BrandLogo invert className="h-3.5" /> · Todos los derechos reservados.</span>
           <span>Diseñado para proteger la identidad corporativa.</span>
         </div>
       </div>
@@ -984,11 +800,9 @@ export function Landing() {
         <Solution />
         <HowItWorks />
         <Benefits />
-        <BeforeAfter />
         <Security />
         <Integration />
         <ResponsiveSection />
-        <UseCases />
         <CommercialCTA />
         <FAQ />
         <ContactForm />
