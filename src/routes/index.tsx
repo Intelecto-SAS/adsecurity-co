@@ -14,16 +14,16 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Plataforma de autoservicio para la gestión de credenciales y recuperación segura de acceso a cuentas corporativas.",
+          "ADSecurity permite a los colaboradores restablecer contraseñas, desbloquear cuentas y recuperar el acceso a sistemas corporativos de forma autónoma, segura y sin depender de la mesa de ayuda.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ADSecurity | Recuperación segura de acceso corporativo" },
+      { name: "twitter:title", content: "ADSecurity | Recuperación segura y autónoma de acceso corporativo" },
       {
         name: "twitter:description",
         content:
-          "Autoservicio seguro para restablecer contraseñas y recuperar acceso corporativo.",
+          "ADSecurity permite a los colaboradores restablecer contraseñas, desbloquear cuentas y recuperar el acceso a sistemas corporativos de forma autónoma, segura y sin depender de la mesa de ayuda.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
