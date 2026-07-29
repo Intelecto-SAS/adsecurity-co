@@ -206,20 +206,20 @@ function Problem() {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="mt-12 neu-card p-8 lg:p-10 flex flex-col md:flex-row items-start md:items-center gap-6 relative overflow-hidden">
+          <div className="mt-12 neu-card p-8 lg:p-10 grid md:grid-cols-3 gap-6 md:gap-8 items-start relative overflow-hidden">
             <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full blur-3xl opacity-40"
               style={{ background: "radial-gradient(circle, oklch(0.78 0.14 220 / 0.5), transparent)" }}
             />
-            <div className="w-14 h-14 rounded-2xl grid place-items-center gradient-electric text-white shrink-0">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div className="flex-1">
-              <p className="text-lg font-medium">
+            <div className="md:col-span-1">
+              <div className="w-14 h-14 rounded-2xl grid place-items-center gradient-electric text-white">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <p className="mt-4 text-lg font-medium">
                 <BrandLogo /> transforma estos incidentes en{" "}
                 <span className="gradient-text font-semibold">procesos rápidos, seguros y completamente autónomos.</span>
               </p>
             </div>
-            <div className="w-full md:w-[340px] lg:w-[380px] shrink-0 rounded-2xl overflow-hidden border border-border/50 bg-black/70 aspect-video">
+            <div className="w-full md:col-span-2 rounded-2xl overflow-hidden border border-border/50 bg-black/70 aspect-video">
               <video
                 controls
                 playsInline
