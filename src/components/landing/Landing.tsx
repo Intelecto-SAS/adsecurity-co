@@ -776,7 +776,7 @@ function Footer() {
     <footer className="relative gradient-hero text-white pt-16 pb-8 overflow-hidden">
       <div className="absolute inset-0 grid-mesh opacity-15" />
       <div className="mx-auto max-w-7xl px-6 relative">
-        <div className="grid md:grid-cols-4 gap-10">
+        <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2">
             <img src={logo} alt="ADSecurity" className="h-8 w-auto brightness-0 invert" />
             <p className="mt-4 text-sm text-white/70 max-w-md">
@@ -790,15 +790,6 @@ function Footer() {
               {["Inicio","Solución","Beneficios","Cómo funciona","Seguridad","Preguntas frecuentes"].map((l) => (
                 <li key={l}><a href={`#${l.toLowerCase().replace(/\s/g, "-").replace("ó","o").replace("í","i")}`} className="hover:text-cyan-brand transition-colors">{l}</a></li>
               ))}
-            </ul>
-          </div>
-          <div>
-            <div className="text-sm font-semibold mb-3">Legal</div>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li><a href="#" className="hover:text-cyan-brand transition-colors">Política de privacidad</a></li>
-              <li><a href="#" className="hover:text-cyan-brand transition-colors">Tratamiento de datos</a></li>
-              <li><a href="#" className="hover:text-cyan-brand transition-colors">Términos y condiciones</a></li>
-              <li><a href="#contacto" className="hover:text-cyan-brand transition-colors">Contacto</a></li>
             </ul>
           </div>
         </div>
