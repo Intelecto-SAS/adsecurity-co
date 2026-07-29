@@ -4,38 +4,38 @@ import { HeroVisual } from "@/components/landing/HeroVisual";
 import { Navbar } from "@/components/landing/Navbar";
 import { Reveal } from "@/components/landing/Reveal";
 import {
-    Activity,
-    ArrowRight,
-    Building,
-    Building2,
-    CheckCircle2,
-    ChevronDown,
-    Clock,
-    FileCheck2,
-    Fingerprint,
-    Globe,
-    HeadphonesIcon,
-    KeyRound,
-    Lock,
-    Mail,
-    MessageSquare,
-    Monitor,
-    MonitorSmartphone,
-    Network,
-    Phone,
-    Send,
-    Server,
-    Settings2,
-    ShieldCheck,
-    Smartphone,
-    Sparkles,
-    Tablet,
-    User,
-    UserCheck,
-    Users,
-    Workflow,
-    XCircle,
-    Zap
+  Activity,
+  ArrowRight,
+  Building,
+  Building2,
+  CheckCircle2,
+  ChevronDown,
+  Clock,
+  FileCheck2,
+  Fingerprint,
+  Globe,
+  HeadphonesIcon,
+  KeyRound,
+  Lock,
+  Mail,
+  MessageSquare,
+  Monitor,
+  MonitorSmartphone,
+  Network,
+  Phone,
+  Send,
+  Server,
+  Settings2,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  Tablet,
+  User,
+  UserCheck,
+  Users,
+  Workflow,
+  XCircle,
+  Zap
 } from "lucide-react";
 import { useState } from "react";
 
@@ -631,7 +631,13 @@ function ContactForm() {
         body: formData,
       });
 
-      const data = await response.json();
+      let data: { success?: boolean; message?: string } | null = null;
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
+
       if (response.ok && data?.success) {
         setStatus("success");
         setResult("Formulario enviado correctamente.");
@@ -640,7 +646,11 @@ function ContactForm() {
         return;
       }
 
-      const apiError = typeof data?.message === "string" ? data.message : "No fue posible enviar la solicitud.";
+      const apiError = typeof data?.message === "string"
+        ? data.message
+        : response.ok
+          ? "No fue posible enviar la solicitud."
+          : `Error del servidor (${response.status}).`;
       setStatus("error");
       setResult(apiError);
     } catch {
@@ -728,7 +738,7 @@ function ContactForm() {
             </label>
 
             {status === "error" && (
-              <div className="text-xs text-destructive px-3 py-2 rounded-lg bg-destructive/10">
+              <div className="text-xs text-destructive px-3 py-2 rounded-lg bg-destructive/10" role="alert" aria-live="assertive">
                 {result}
               </div>
             )}
