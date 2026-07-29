@@ -1,4 +1,5 @@
 import logo from "@/assets/adsecurity-logo.png";
+import videoAdsecurity from "@/assets/video_Adsecurity.mp4";
 import { HeroVisual } from "@/components/landing/HeroVisual";
 import { Navbar } from "@/components/landing/Navbar";
 import { Reveal } from "@/components/landing/Reveal";
@@ -213,10 +214,24 @@ function Problem() {
             <div className="w-14 h-14 rounded-2xl grid place-items-center gradient-electric text-white shrink-0">
               <Sparkles className="w-6 h-6" />
             </div>
-            <p className="text-lg font-medium">
-              <BrandLogo /> transforma estos incidentes en{" "}
-              <span className="gradient-text font-semibold">procesos rápidos, seguros y completamente autónomos.</span>
-            </p>
+            <div className="flex-1">
+              <p className="text-lg font-medium">
+                <BrandLogo /> transforma estos incidentes en{" "}
+                <span className="gradient-text font-semibold">procesos rápidos, seguros y completamente autónomos.</span>
+              </p>
+            </div>
+            <div className="w-full md:w-[340px] lg:w-[380px] shrink-0 rounded-2xl overflow-hidden border border-border/50 bg-black/70 aspect-video">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={logo}
+                className="w-full h-full object-cover"
+              >
+                <source src={videoAdsecurity} type="video/mp4" />
+                Tu navegador no soporta video HTML5.
+              </video>
+            </div>
           </div>
         </Reveal>
       </div>
