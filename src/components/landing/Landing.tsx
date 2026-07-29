@@ -23,7 +23,6 @@ import {
     MonitorSmartphone,
     Network,
     Phone,
-    ScrollText,
     Send,
     Server,
     Settings2,
@@ -36,7 +35,7 @@ import {
     Users,
     Workflow,
     XCircle,
-    Zap,
+    Zap
 } from "lucide-react";
 import { useState } from "react";
 
@@ -345,14 +344,14 @@ function Benefits() {
 /* --------------------------- SECURITY --------------------------- */
 function Security() {
   const items = [
-    { icon: <Fingerprint className="w-4 h-4" />, label: "Validación de identidad" },
-    { icon: <Workflow className="w-4 h-4" />, label: "Flujos controlados" },
-    { icon: <ScrollText className="w-4 h-4" />, label: "Registro de acciones" },
-    { icon: <Server className="w-4 h-4" />, label: "Integración con directorios" },
-    { icon: <Zap className="w-4 h-4" />, label: "Automatización segura" },
-    { icon: <Lock className="w-4 h-4" />, label: "Protección de credenciales" },
-    { icon: <Settings2 className="w-4 h-4" />, label: "Políticas configurables" },
-    { icon: <Activity className="w-4 h-4" />, label: "Trazabilidad de solicitudes" },
+    { icon: <Fingerprint className="w-4 h-4" />, label: "Compatible con biometría: huella y Face ID" },
+    { icon: <Monitor className="w-4 h-4" />, label: "En PC: soporte para reconocimiento facial" },
+    { icon: <KeyRound className="w-4 h-4" />, label: "Compatible con Microsoft Authenticator" },
+    { icon: <KeyRound className="w-4 h-4" />, label: "Compatible con Google Authenticator" },
+    { icon: <KeyRound className="w-4 h-4" />, label: "Compatible con Apple Authenticator" },
+    { icon: <Settings2 className="w-4 h-4" />, label: "Pantallas de políticas del servidor" },
+    { icon: <Lock className="w-4 h-4" />, label: "Configuración de tamaño de contraseña" },
+    { icon: <Activity className="w-4 h-4" />, label: "Control de intentos y bloqueo" },
   ];
   return (
     <section id="seguridad" className="py-28 relative overflow-hidden gradient-hero text-white">
@@ -417,9 +416,12 @@ function Security() {
   );
 }
 
-/* --------------------------- INTEGRATION --------------------------- */
-function Integration() {
-  const nodes = [
+/* --------------------------- RESPONSIVE --------------------------- */
+function ResponsiveSection() {
+  const items = [
+    { icon: <Monitor className="w-4 h-4" />, label: "Computador" },
+    { icon: <Tablet className="w-4 h-4" />, label: "Tableta" },
+    { icon: <Smartphone className="w-4 h-4" />, label: "Celular" },
     { icon: <Server className="w-4 h-4" />, label: "Directorio corporativo" },
     { icon: <Building2 className="w-4 h-4" />, label: "Sistemas internos" },
     { icon: <Network className="w-4 h-4" />, label: "Aplicaciones empresariales" },
@@ -427,38 +429,6 @@ function Integration() {
     { icon: <HeadphonesIcon className="w-4 h-4" />, label: "Equipos de soporte" },
     { icon: <Settings2 className="w-4 h-4" />, label: "Políticas de seguridad" },
   ];
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary">Integración</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            Diseñado para integrarse con la{" "}
-            <span className="gradient-text">infraestructura de tu organización</span>
-          </h2>
-        </Reveal>
-
-        <Reveal delay={200}>
-          <div className="mt-12 flex flex-wrap gap-3">
-            {nodes.map((n) => (
-              <span
-                key={n.label}
-                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full neu-card text-sm font-medium"
-              >
-                <span className="text-primary">{n.icon}</span>
-                {n.label}
-              </span>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-
-/* --------------------------- RESPONSIVE --------------------------- */
-function ResponsiveSection() {
   return (
     <section className="py-24 bg-secondary/30">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-14 items-center">
@@ -473,11 +443,7 @@ function ResponsiveSection() {
             usuarios con diferentes niveles de conocimiento tecnológico.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            {[
-              { icon: <Monitor className="w-4 h-4" />, label: "Computador" },
-              { icon: <Tablet className="w-4 h-4" />, label: "Tableta" },
-              { icon: <Smartphone className="w-4 h-4" />, label: "Celular" },
-            ].map((d) => (
+            {items.map((d) => (
               <span key={d.label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full neu-card text-sm font-medium">
                 <span className="text-primary">{d.icon}</span>
                 {d.label}
@@ -816,7 +782,6 @@ export function Landing() {
         <HowItWorks />
         <Benefits />
         <Security />
-        <Integration />
         <ResponsiveSection />
         <CommercialCTA />
         <FAQ />
