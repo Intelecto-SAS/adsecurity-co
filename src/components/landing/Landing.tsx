@@ -607,6 +607,8 @@ function ContactForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formElement = e.currentTarget;
+
     if (!form.name || !form.company || !form.email || !form.consent) {
       setStatus("error");
       setResult("Por favor completa los campos requeridos y acepta el tratamiento de datos.");
@@ -623,7 +625,7 @@ function ContactForm() {
     setResult("Enviando...");
 
     try {
-      const formData = new FormData(e.currentTarget);
+      const formData = new FormData(formElement);
       formData.append("access_key", accessKey);
 
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -642,7 +644,7 @@ function ContactForm() {
         setStatus("success");
         setResult("Formulario enviado correctamente.");
         setForm({ name: "", company: "", role: "", email: "", phone: "", size: "", message: "", consent: false });
-        e.currentTarget.reset();
+        formElement.reset();
         return;
       }
 
