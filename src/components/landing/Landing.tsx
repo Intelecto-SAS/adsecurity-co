@@ -598,20 +598,55 @@ function FAQ() {
 
 /* --------------------------- CONTACT FORM --------------------------- */
 function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [result, setResult] = useState("");
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
   const [form, setForm] = useState({
     name: "", company: "", role: "", email: "", phone: "", size: "", message: "", consent: false,
   });
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.name || !form.company || !form.email || !form.consent) {
       setStatus("error");
+      setResult("Por favor completa los campos requeridos y acepta el tratamiento de datos.");
       return;
     }
-    setStatus("success");
-    setForm({ name: "", company: "", role: "", email: "", phone: "", size: "", message: "", consent: false });
-    setTimeout(() => setStatus("idle"), 5000);
+
+    if (!accessKey) {
+      setStatus("error");
+      setResult("No se pudo enviar el formulario: falta configurar VITE_WEB3FORMS_ACCESS_KEY.");
+      return;
+    }
+
+    setStatus("sending");
+    setResult("Enviando...");
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append("access_key", accessKey);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (response.ok && data?.success) {
+        setStatus("success");
+        setResult("Formulario enviado correctamente.");
+        setForm({ name: "", company: "", role: "", email: "", phone: "", size: "", message: "", consent: false });
+        e.currentTarget.reset();
+        return;
+      }
+
+      const apiError = typeof data?.message === "string" ? data.message : "No fue posible enviar la solicitud.";
+      setStatus("error");
+      setResult(apiError);
+    } catch {
+      setStatus("error");
+      setResult("Error de red. Verifica tu conexión e inténtalo nuevamente.");
+    }
   };
 
   const input = "w-full neu-inset px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-muted-foreground/60";
@@ -649,22 +684,22 @@ function ContactForm() {
           <form onSubmit={onSubmit} className="neu-card p-6 md:p-8 space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Nombre" icon={<User className="w-4 h-4" />}>
-                <input required className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" />
+                <input name="name" required className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" />
               </Field>
               <Field label="Empresa" icon={<Building className="w-4 h-4" />}>
-                <input required className={input} value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Nombre de la empresa" />
+                <input name="company" required className={input} value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Nombre de la empresa" />
               </Field>
               <Field label="Cargo" icon={<UserCheck className="w-4 h-4" />}>
-                <input className={input} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Cargo actual" />
+                <input name="role" className={input} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Cargo actual" />
               </Field>
               <Field label="Correo corporativo" icon={<Mail className="w-4 h-4" />}>
-                <input required type="email" className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="tu@empresa.com" />
+                <input name="email" required type="email" className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="tu@empresa.com" />
               </Field>
               <Field label="Teléfono" icon={<Phone className="w-4 h-4" />}>
-                <input className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+00 000 000 000" />
+                <input name="phone" className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+00 000 000 000" />
               </Field>
               <Field label="Número de colaboradores" icon={<Users className="w-4 h-4" />}>
-                <select className={input} value={form.size} onChange={(e) => setForm({ ...form, size: e.target.value })}>
+                <select name="team_size" className={input} value={form.size} onChange={(e) => setForm({ ...form, size: e.target.value })}>
                   <option value="">Selecciona un rango</option>
                   <option>1 - 100</option>
                   <option>101 - 500</option>
@@ -675,12 +710,13 @@ function ContactForm() {
               </Field>
             </div>
             <Field label="Mensaje" icon={<MessageSquare className="w-4 h-4" />}>
-              <textarea rows={4} className={input} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Cuéntanos sobre tu caso" />
+              <textarea name="message" rows={4} className={input} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Cuéntanos sobre tu caso" />
             </Field>
 
             <label className="flex items-start gap-3 text-xs text-muted-foreground cursor-pointer">
               <input
                 type="checkbox"
+                name="consent"
                 checked={form.consent}
                 onChange={(e) => setForm({ ...form, consent: e.target.checked })}
                 className="mt-0.5 accent-primary w-4 h-4"
@@ -693,20 +729,26 @@ function ContactForm() {
 
             {status === "error" && (
               <div className="text-xs text-destructive px-3 py-2 rounded-lg bg-destructive/10">
-                Por favor completa los campos requeridos y acepta el tratamiento de datos.
+                {result}
               </div>
             )}
             {status === "success" && (
-              <div className="text-xs text-primary px-3 py-2 rounded-lg bg-primary/10 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" /> ¡Solicitud enviada! Un asesor te contactará pronto.
+              <div className="text-xs text-primary px-3 py-2 rounded-lg bg-primary/10 flex items-center gap-2" role="status" aria-live="polite">
+                <CheckCircle2 className="w-4 h-4" /> {result}
+              </div>
+            )}
+            {status === "sending" && (
+              <div className="text-xs text-muted-foreground px-3 py-2 rounded-lg bg-secondary/70" role="status" aria-live="polite">
+                {result}
               </div>
             )}
 
             <button
               type="submit"
+              disabled={status === "sending"}
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold text-white gradient-electric btn-glow btn-glow-hover"
             >
-              Solicitar demostración
+              {status === "sending" ? "Enviando..." : "Solicitar demostración"}
               <Send className="w-4 h-4" />
             </button>
           </form>
